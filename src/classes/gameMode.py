@@ -9,11 +9,51 @@ class Input:
         self.ballPose=ballPose
         self.playerPose=playerPose
 
+class Input:
+    def __init__(self, PlayerInput, OtherInput):
+        self.PlayerInput=PlayerInput
+        self.OtherInput=OtherInput
+    pass
+
+class PlayerInput:
+    def __init__(self, BeamSwitch, LinearActuator, Manette):
+        self.BeamSwitch=BeamSwitch
+        self.LinearActuator=LinearActuator
+        self.Manette=Manette
+    pass
+
+class Manette(ABC):
+    @abstractmethod
+    def __init__(self, action):
+        pass
+
+class Manette3bouton(Manette):
+    def __init__(self, action):
+        self.action=action
+    pass
+
+class OtherInput:
+    def __init__(self, ballPose):
+        self.ballPose=ballPose
+        self.playerPose=playerPose
+    pass
+
+
 class Output:
-    def __init__(self, led=0, sound=0, playerMove=False):
+    def __init__(self, led, sound, playerMove):
         self.led=led
         self.sound=sound
         self.playerMove=playerMove
+    pass
+
+class Parameter:
+    def __init__(self, light, mode, volume, level, reset):
+        self.light=light
+        self.mode=mode
+        self.volume=volume
+        self.level=level
+        self.reset=reset
+    pass
 
 class GameMode(ABC):
     """
@@ -54,7 +94,11 @@ class LightTracker(GameMode):
         playersAlive=[]
         for i in connectedGamepads:
             if i == 1 :
-                playersalive.append("joueur {i}")
+                playersAlive.append("joueur {i}")
+        if not playersAlive:
+            print("No player is connected")
+            endgame=1
+            return endgame
 
 
 
