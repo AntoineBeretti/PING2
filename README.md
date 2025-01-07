@@ -11,6 +11,7 @@ PING² est un système modulaire composé de deux sous-systèmes principaux :
 
 L'architecture est pensée pour évoluer facilement, avec un matériel modulaire permettant de nombreuses options de connexion. En plus de l'esp32 et de la raspberry, d'autres composants ont besoin d'être codé, comme les arduino Nano qui gèrent les manettes et l'interface de paramètrage.
 
+
 ## 📚 Description de la Branche
 
 La branche principale contient les versions stables et testées des différents codes à flasher sur les composants du projet. Assurez-vous de mettre à jour régulièrement pour profiter de la meilleure expérience de jeu.
