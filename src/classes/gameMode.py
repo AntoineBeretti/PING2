@@ -50,7 +50,15 @@ class LightTracker(GameMode):
     Game mode of Light Tracker. Traque-lumière in french.
     """
     
-    self.
+    def LightTracker(speed):
+        playersAlive=[]
+        for i in connectedGamepads:
+            if i == 1 :
+                playersalive.append("joueur {i}")
+
+
+
+
 
     pass
 
