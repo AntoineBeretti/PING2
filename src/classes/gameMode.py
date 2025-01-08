@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 from classes.input import Input
+from classes.output import Output
+import time
 
 class GameMode(ABC):
     """
@@ -21,7 +23,46 @@ class RedLightGreenLight(GameMode):
     """
     Game mode of Red Light Green Light. 1 2 3 soleil in french.
     """
-    
+    def __init__(self):
+        self.is_light_green=False
+        self.light_duration=3 # in seconds
+        self.last_light_switch_time = time.time()
+        pass
+
+
+    def _switch_light(self):
+        """Change la couleur de la lumière (rouge ↔ vert)."""
+        current_time = time.time()
+        if current_time - self.last_light_switch_time >= self.light_duration:
+            self.is_light_green = not self.is_light_green  # Alterne entre rouge et vert
+            self.last_light_switch_time = current_time
+
+    def run(self,Input):
+        self._switch_light()  # Vérifie si on doit changer l'état de la lumière
+        for player in Input.PlayerInput.Manette:
+            if player in self.players_eliminated:
+                continue
+
+            if not self.is_light_green and player.action == "move":
+                # Si la lumière est rouge et que le joueur bouge, il est éliminé
+                self.players_eliminated.append(player)
+                Output.led = self.is_light_green
+                Output.sound = "Player {} eliminated".format(player)
+                
+            elif self.is_light_green:
+                # Si la lumière est verte, les joueurs peuvent bouger librement
+                Output.led = self.is_light_green
+                Output.sound = "La lumière est verte"
+                
+            else:
+                # Si la lumière est rouge et que le joueur ne bouge pas
+                Output.led = self.is_light_green
+                Output.sound = "La lumière est rouge"
+                
+
+        return outputs
+            
+        pass
     pass
 
 class AtYourCommand(GameMode):
