@@ -1,59 +1,5 @@
 from abc import ABC, abstractmethod
-from gameController import 
-
-
-
-class Input:
-    def __init__(self, gameController=false, ballPose=0, playerPose):
-        self.gameController=gameController
-        self.ballPose=ballPose
-        self.playerPose=playerPose
-
-class Input:
-    def __init__(self, PlayerInput, OtherInput):
-        self.PlayerInput=PlayerInput
-        self.OtherInput=OtherInput
-    pass
-
-class PlayerInput:
-    def __init__(self, BeamSwitch, LinearActuator, Manette):
-        self.BeamSwitch=BeamSwitch
-        self.LinearActuator=LinearActuator
-        self.Manette=Manette
-    pass
-
-class Manette(ABC):
-    @abstractmethod
-    def __init__(self, action):
-        pass
-
-class Manette3bouton(Manette):
-    def __init__(self, action):
-        self.action=action
-    pass
-
-class OtherInput:
-    def __init__(self, ballPose):
-        self.ballPose=ballPose
-        self.playerPose=playerPose
-    pass
-
-
-class Output:
-    def __init__(self, led, sound, playerMove):
-        self.led=led
-        self.sound=sound
-        self.playerMove=playerMove
-    pass
-
-class Parameter:
-    def __init__(self, light, mode, volume, level, reset):
-        self.light=light
-        self.mode=mode
-        self.volume=volume
-        self.level=level
-        self.reset=reset
-    pass
+from classes.input import Input
 
 class GameMode(ABC):
     """
@@ -120,7 +66,7 @@ class SandBox(GameMode):
     
     pass
 
-class PING(GameMode):
+class PingGame(GameMode):
     """
     Game mode of PING.
     """
