@@ -1,7 +1,7 @@
 class GameController3ButtonInput(GameControllerInput):
-    def __init__(self, newAction, newActionleft, newActionright, newActionShoot):
+    def __init__(self, newAction, newActionLeft, newActionRight, newActionShoot):
         self.newAction=newAction
-        self.newActionleft=newActionleft
-        self.newActionright=newActionright
+        self.newActionleft=newActionLeft
+        self.newActionright=newActionRight
         self.newActionShoot=newActionShoot
     pass

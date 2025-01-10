@@ -3,7 +3,6 @@ from classes.output.output import Output
 import time
 from logFile import*   
 from classes.config import GREEN, ORANGE, YELLOW, RED
-
 log = LogFile()
 
 class RedLightGreenLight(GameMode):
@@ -19,7 +18,7 @@ class RedLightGreenLight(GameMode):
 
     def can_move(self, currentTime):
         """
-        Vérifie si le joueur peut se déplacer (lumière verte).
+        Check if the player can move (green light)
         """
         elapsedTime = currentTime - self.timeInit
         if elapsedTime<0:
@@ -28,18 +27,18 @@ class RedLightGreenLight(GameMode):
 
     def check_action(self, playerInput, currentTime):
         """
-        Vérifie l'action du joueur selon l'état actuel de la lumière.
+        Checks the player's action according to the current state of the light.
         """
         if playerInput.GameController.newAction:
             playerOutput = self.outputData.ListPlayerOutput[playerInput.idPlayer]
             
             if self.can_move(currentTime):
-                # Lumière verte : déplacement autorisé
+                # light green : allowed to move
                 playerOutput.LinearActuatorOutput.move_to_right = True
                 playerOutput.LinearActuatorOutput.move_to_leftLimit = False
                 playerOutput.PlayerLedStrip.onPlayer(GREEN)
             else:
-                # Lumière rouge : déplacement interdit
+                # light red : not allowed to move
                 playerOutput.LinearActuatorOutput.move_to_leftLimit = True
                 playerOutput.PlayerLedStrip.onPlayer(ORANGE)
         else:
@@ -49,7 +48,7 @@ class RedLightGreenLight(GameMode):
 
     def check_victory(self, playerInput):
         """
-        Vérifie si un joueur a gagné.
+        Checks if a player has won.
         """
         if playerInput.LinearActuatorInput.currentPose >= playerInput.LinearActuatorInput.rightLimit-20:
             self.outputData.ListPlayerOutput[playerInput.idPlayer].PlayerLedStrip.onPlayer(YELLOW)
@@ -58,38 +57,38 @@ class RedLightGreenLight(GameMode):
 
     def cycle(self, currentTime):
         """
-        Gère l'alternance entre les feux vert et rouge.
+        Manages the alternation between green and red lights.
         """
         elapsedTime = currentTime - self.timeInit
         if elapsedTime<0:
             log.write_in_log("ERROR", "gameMode", "cycle", "elaspsed time has a negative value")
         self.isLightGreen = elapsedTime < self.durationGreenLight
 
-        self.outputData.ledStrip.onLedStrip(GREEN) if self.isLightGreen else self.outputData.ledStrip.onLedStrip(GREEN)
+        self.outputData.ledStrip.onLedStrip(GREEN) if self.isLightGreen else self.outputData.ledStrip.onLedStrip(RED)
 
-    def run(self, input_data):
+    def run(self, inputData):
         """
-        Exécute une itération du mode de jeu.
+        Executes an iteration of the game mode.
         """
-        if not input_data.ListPlayerInput:
+        if not inputData.ListPlayerInput:
             log.write_in_log("ERROR", "gameMode", "run", "no player was connected")
-        for playerInput in input_data.ListPlayerInput:
+        for playerInput in inputData.ListPlayerInput:
             if self.check_victory(playerInput):
-                self.stop(input_data)
+                self.stop(inputData)
                 return self.outputData
 
-            # Vérifie les actions des joueurs
+            # check player action
             self.check_action(playerInput, time.time())
 
-        # Cycle du feu rouge / vert
+        # Cycle between green and red light
         self.cycle(time.time())
         return self.outputData
 
-    def stop(self, input_data):
+    def stop(self, inputData):
         """
-        Arrête le jeu et réinitialise les sorties.
+        Stops the game and resets the outputs.
         """
-        for playerInput in input_data.ListPlayerInput:
+        for playerInput in inputData.ListPlayerInput:
             playerOutput = self.outputData.ListPlayerOutput[playerInput.idPlayer]
             playerOutput.PlayerLedStrip.clearPlayer()
             playerOutput.LinearActuatorOutput.move_to_right = False
