@@ -26,6 +26,7 @@ class Ping:
         
     def run(self):
         
+        
         pass
         
     def __str__(self):
