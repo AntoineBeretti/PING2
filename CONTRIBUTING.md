@@ -68,6 +68,9 @@ void my_methode();
 };
 ```
 
+### 📬 Contact
+Pour toute question ou clarification, n'hésitez pas à contacter l'équipe de développement ou à ouvrir une Issue sur le dépôt GitHub.
+
 ## Licence
 
 Ping²© 2024 by Antoine, Antoine, Robin, Simon, Thomas is licensed under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/)
