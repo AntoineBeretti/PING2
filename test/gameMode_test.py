@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src"
 
 # Importer les classes nécessaires
 from classes.gameMode import RedLightGreenLight
-from classes.input import Input, PlayerInput, BeamSwitch, LinearActuatorInput, GameController3button, OtherInput
-from classes.output import Output, PlayerOutput, Led, LinearActuatorOutput
+from classes.input.input import Input, PlayerInput, BeamSwitch, LinearActuatorInput, GameController3button, OtherInput
+from classes.output.output import Output, PlayerOutput, Led, LinearActuatorOutput
 from classes.ledStrip import LedStrip, PlayerLedStrip
 from classes.config import GPIO_PIN, NUMBER_OF_LEDS, FREQUENCY, DMA_CHANNEL, BRIGHTNESS, PLAYER_OFFSETS
 

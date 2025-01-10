@@ -1,5 +1,5 @@
 from classes.gameMode import GameMode
-from classes.output import Output
+from classes.output.output import Output
 import time
 from logFile import*   
 from classes.config import GREEN, ORANGE, YELLOW, RED
