@@ -22,8 +22,8 @@ La branche principale contient les versions stables et testées des différents 
 - Phase de Test : Les codes sont testés ensemble pour s'assurer qu'ils fonctionnent de manière cohérente sur l'ensemble du système.
 - Validation : Une fois les tests concluants, la branche dev est fusionnée (merge) dans la branche main, qui représente alors la version stable et prête pour la production du projet.
 
-  ## 📄 Instructions pour les Contributeurs
-Les informations relatives aux contributions sont disponibles dans la branche [dev](https://github.com/2PING2/PING2/tree/dev)
+## 📄 Instructions pour les Contributeurs
+Les informations relatives aux contributions sont disponibles dans le fichier [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### 📬 Contact
 Pour toute question ou clarification, n'hésitez pas à contacter l'équipe de développement ou à ouvrir une Issue sur le dépôt GitHub.
